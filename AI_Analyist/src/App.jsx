@@ -21,8 +21,12 @@ function Home() {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data)
         // 跳轉到 /result 並傳遞後端返回的數據作為狀態
-        navigate("/result", { state: { result: data.result } });
+        navigate("/result", { state: { 
+          swot_analysis: data.swot_analysis,
+          self_introduction: data.self_introduction 
+      }});
       } else {
         const errorData = await response.json();
         navigate("/result", { state: { result: errorData.error } });

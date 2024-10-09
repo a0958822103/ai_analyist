@@ -5,9 +5,11 @@ import "./index.css"
 
 function Home() {
   const [userInput, setUserInput] = useState("");
+  const [loading, setLoading] = useState(false); // 加載狀態
   const navigate = useNavigate(); // 用於頁面跳轉
 
   const handleAnalyze = async () => {
+    setLoading(true);
     try {
       const response = await fetch("http://localhost:5000/analyze", {
         method: "POST",
@@ -47,7 +49,9 @@ function Home() {
         rows={4}
         cols={50}
       />
-      <button onClick={handleAnalyze}>分析</button>
+      <button onClick={handleAnalyze} disabled={loading}>
+      {loading ? "分析中..." : "分析"}
+      </button>
     </div>
   );
 }

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import LoadingButton from '@mui/lab/LoadingButton';
+import Lottie from "lottie-react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import AnalyzePage from "./AnalyzePage";  // 將新頁面的組件引入
 import "./index.css"
+import Loading from "./assets/Animation - 1728626859913.json";
+import { blue } from "@mui/material/colors";
 
 function Home() {
   const [userInput, setUserInput] = useState("");
@@ -40,8 +44,9 @@ function Home() {
   };
 
   return (
+    <>
     <div className="analyist">
-      <h1>企業分析 RAG</h1>
+      <h1>AI企業分析師</h1>
       <input
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)}
@@ -50,9 +55,11 @@ function Home() {
         cols={50}
       />
       <button onClick={handleAnalyze} disabled={loading}>
-      {loading ? "分析中..." : "分析"}
+      {loading ? <Lottie animationData={Loading} style={{ width: 45, height: 25, transform: 'scale(3)' }}  /> 
+               : "分析"}  {/* transform: 'scale(3)動畫(本身)放大3倍 */}
       </button>
     </div>
+    </>
   );
 }
 

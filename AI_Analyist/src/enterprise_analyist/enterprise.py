@@ -61,7 +61,7 @@ def handle_user_input(user_input, collection):
         # 生成第二個 prompt 的結果 (這是另一個獨立的分析，與第一個無關)
         introduction_response = ollama.generate(
             model="ycchen/breeze-7b-instruct-v1_0",
-            prompt=f"你是位面試官，請使用以下資料對面試者進行一個自我介紹的建議(須包含讓求職者介紹個人經歷、與{user_input}類別相關的經驗、自身優勢):\n\n"
+            prompt=f"你是位面試官，請使用以下資料對面試者進行一個自我介紹的建議(須包含讓求職者介紹個人經歷、與{user_input}類別相關的經驗、自身優勢)，生成一份包含前面建議的完整範例，放置於文末:\n\n"
                     f"{data}\n\n請用繁體中文回答問題，並請將每個部分進行分段。"
         )
         self_introduction = introduction_response['response']

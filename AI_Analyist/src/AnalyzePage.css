@@ -86,7 +86,15 @@ h2 {
 }
 
 .content.show {
-  max-height: 250vh;
+  max-height: 600vh;
   transform: translateY(0);
   opacity: 1;
+}
+
+.select_enterprise{
+  margin: 0px 10px ;
+}
+
+.analyist_button{
+  margin: 0 10%;
 }

@@ -6,9 +6,13 @@ function AnalyzePage() {
   const location = useLocation();  // 取得來自 Home 頁面的狀態
   const navigate = useNavigate();  // 用來實現返回首頁的跳轉
   
-  const result1 = location.state?.swot_analysis || "沒有結果";  // 從狀態中提取分析結果
-  const result2 = location.state?.self_introduction || "";  // 從狀態中提取自我介紹
-  const resultArray = result1.split('\n');  // 將 swot 分析結果按換行符號分割
+  const result1 = location.state?.enterprise_introduce || "沒有結果"; 
+  const result2 = location.state?.swot_analysis || "沒有結果";  // 從狀態中提取分析結果
+  const result3 = location.state?.self_introduction || "";  
+
+  const resultArray1 = result1.split('\n'); 
+  const resultArray2 = result2.split('\n');  // 將 swot 分析結果按換行符號分割
+  const resultArray3 = result3.split('\n');
 
   // 定義狀態來控制各個部分是否顯示
   const [showCompanyInfo, setShowCompanyInfo] = useState(false);
@@ -26,13 +30,17 @@ function AnalyzePage() {
           公司簡介
         </h2>
         <div className={`content ${showCompanyInfo ? "show" : ""}`}>
-          <p>企業: 長榮海運</p>
-          <p>代表人: 張衍義</p>
-          <p>產業類別: 儲配／運輸物流業</p>
-          <p>資本額: 700億元(新台幣)</p>
-          <p>員工人數: 職員有9660人、海勤有2961人，共計12621名員工。</p>
-          <p>地址: 台北市中山區民生東路二段166號1-4樓。</p>
-          <p>公司願景: 1.創造利潤 2.照顧員工 3.回饋社會 4.持續創新 5.誠信經營。</p>
+            {resultArray1.length > 0 ?
+            (
+              resultArray1.map((line, index) => (
+              <blockquote key={index} className="highlighted-result">
+                {line}
+              </blockquote>
+            ))
+          ) : 
+          (
+            <p>沒有找到相關分析摘要。</p>
+          )}
         </div>
       </div>
 
@@ -42,8 +50,8 @@ function AnalyzePage() {
           分析摘要
         </h2>
         <div className={`content ${showAnalysisSummary ? "show" : ""}`}>
-          {resultArray.length > 0 ? (
-            resultArray.map((line, index) => (
+          {resultArray2.length > 0 ? (
+            resultArray2.map((line, index) => (
               <blockquote key={index} className="highlighted-result">
                 {line}
               </blockquote>
@@ -54,17 +62,23 @@ function AnalyzePage() {
         </div>
       </div>
 
-      {/* 自我介紹部分，僅在 result2 存在時顯示 */}
-      {result2 && (
-        <div className="report-section">
-          <h2 onClick={() => setShowSelfIntroduction(!showSelfIntroduction)}>
-            自我介紹建議
-          </h2>
-          <div className={`content ${showSelfIntroduction ? "show" : ""}`}>
-            <p>{result2}</p>
-          </div>
+      {/* 自我介紹部分 */}
+      <div className="report-section">
+        <h2 onClick={() => setShowSelfIntroduction(!showSelfIntroduction)}>
+          自我介紹建議
+        </h2>
+        <div className={`content ${showSelfIntroduction ? "show" : ""}`}>
+          {resultArray3.length > 0 ? (
+            resultArray3.map((line, index) => (
+              <blockquote key={index} className="highlighted-result">
+                {line}
+              </blockquote>
+            ))
+          ) : (
+            <p>沒有找到相關分析摘要。</p>
+          )}
         </div>
-      )}
+      </div>
 
       <hr className="divider" />
       

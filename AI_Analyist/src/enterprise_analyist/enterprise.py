@@ -8,7 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# 初始化資料庫
+# 初始化資料庫 test
 def setup_database():
     client = chromadb.Client()
     file_path = 'AI_Shipping information.json'
@@ -50,7 +50,7 @@ def handle_user_input(user_input, collection):
         # 使用第一個查詢結果生成第一個輸出的分析
         data = results['documents'][0]
 
-        # 生成企業簡介
+        # 生成企業簡介 
         if user_input == "長榮海運":
             enterprise_introduce = """
                 企業名稱: 長榮海運

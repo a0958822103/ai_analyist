@@ -8,7 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# 初始化資料庫 test
+# 初始化資料庫 
 def setup_database():
     client = chromadb.Client()
     file_path = 'AI_Shipping information.json'
